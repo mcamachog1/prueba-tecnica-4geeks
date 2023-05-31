@@ -1,17 +1,19 @@
 image: gitpod/workspace-full
 
 # Commands that will run on workspace start
+
 tasks:
-  - init: |
+  - name: Dependencies & venv
+    init: |
       python -m venv venv
       source venv/bin/activate
       pip install --upgrade pip wheel setuptools
       pip install Django
       python manage.py migrate
-  - command: |
+    command: |
       source venv/bin/activate
-      python manage.py runserver
-  
+      python manage.py runserv      
+
 ports:
   - port: 8000
     visibility: private
