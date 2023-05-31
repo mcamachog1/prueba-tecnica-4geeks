@@ -2,14 +2,21 @@ image: gitpod/workspace-full
 
 # Commands that will run on workspace start
 tasks:
-  - name: Setup, Install & Build
-    before: yarn global add express
-    init: yarn install
-    command: yarn build
-
-# Ports to expose on workspace startup
+  - init: |
+      python -m venv venv
+      source venv/bin/activate
+      pip install --upgrade pip wheel setuptools
+      pip install Django
+      python manage.py migrate
+  - command: |
+      source venv/bin/activate
+      python manage.py runserver
+  
 ports:
-  - port: 3000
+  - port: 8000
+    visibility: private
     onOpen: open-preview
-    name: Website
-    description: Website Preview
+
+vscode:
+  extensions:
+    - ms-python.python
