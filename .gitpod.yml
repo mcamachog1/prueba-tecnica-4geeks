@@ -12,7 +12,6 @@ tasks:
       python manage.py migrate
     command: |
       source venv/bin/activate
-      python manage.py runserv      
 
 ports:
   - port: 8000
